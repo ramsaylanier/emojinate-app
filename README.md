@@ -8,9 +8,12 @@ that writer's block.
 Its available on the [Play Store](https://play.google.com/store/apps/details?id=com.rawms.emojinate&hl=en_US) and [App Store](https://apps.apple.com/ph/app/emojinate/id6730111409?platform=iphone).
 
 - [Emojinate](#emojinate)
-  - [About This Project](#about-this-project)
+  - [About This Project / PreRequisites](#about-this-project--prerequisites)
   - [Get started](#get-started)
   - [State](#state)
+  - [Data](#data)
+  - [Theming](#theming)
+  - [Emoji / Fonts](#emoji--fonts)
   - [Hooks](#hooks)
     - [UseThemeColors](#usethemecolors)
   - [Other Stuff](#other-stuff)
@@ -20,39 +23,27 @@ Its available on the [Play Store](https://play.google.com/store/apps/details?id=
 
 ---
 
-## About This Project
+## About This Project / PreRequisites
 
 Emojinate is built using React Native on the [Expo](https://expo.dev/) platform.
-You'll need to [follow their
+If you want to build this locally, you'll want to [follow their
 introduction](https://docs.expo.dev/get-started/introduction/) to get your
-environment up and running to development native appliation using React Native
-on expo.
+environment up and running, if you haven't done so already.
 
 Its a very simple application: only 4 screens total. It uses `mobx` for local
 application state, and stores user data on the device in a SQLite database
-(again, very small: only 2 tables). It uses `kysely` for SQL querying.
+(again, very small: only 2 tables). It uses `kysely` for SQL querying. There are
+no styling or UI libraries used, outside of what comes with Expo.
 
 ## Get started
 
 1. Install dependencies
+
    ```bash
    npm install
    ```
-2. Copy `.env.sample` into `.env`. Update / add any environment variables
-   you want.
 
-   ```bash
-   cp .env.sample .env
-   ```
-
-3. Review the `app.json` file and update the following:
-
-   - name
-   - slug
-   - scheme
-   - package
-
-4. Start the app
+2. Start the app
 
    ```bash
     npx expo start
@@ -71,6 +62,27 @@ You can start developing by editing the files inside the **app** directory. This
 Local app state is tracked using mobx. Review the `store.ts` file for the store
 schema and available actions. This is where most of the application logic
 exists.
+
+## Data
+
+Application data is stored locally on-device in a SQLite database. The SQL
+schema and migrations can be found in the `data` directory. When the application
+first starts it will run the migrations in the `data/migrations`
+directory. These are handled using `kysely`.
+
+## Theming
+
+The color scheme for the application can be found at `constants/Colors.ts`. The
+application supports both light and dark themes, based on the user's system
+setting. Each color must be an array of two colors, one for light mode and one
+for dark mode.
+
+## Emoji / Fonts
+
+The list of emoji found at `emoji.json` is copied from the [Google Fonts
+emoji-metatadata github
+repository](https://github.com/googlefonts/emoji-metadata). The required fonts
+are included in this repo in `/assets/fonts/`.
 
 ## Hooks
 

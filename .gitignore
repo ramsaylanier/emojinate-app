@@ -15,6 +15,7 @@ ios/
 
 .env
 eas.json
+app.json
 
 # macOS
 .DS_Store
